@@ -1,0 +1,147 @@
+---
+import { siteConfig } from '../../site.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Footer from '../components/Footer.astro';
+
+const PRIMARY = siteConfig.colors.primary;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.siteUrl}/#organization`,
+      "name": siteConfig.name,
+      "url": siteConfig.siteUrl,
+      "logo": { "@type": "ImageObject", "url": `${siteConfig.siteUrl}/favicon.svg` },
+      "description": siteConfig.description,
+      "telephone": siteConfig.phone.replace(/\s/g, ''),
+      "email": siteConfig.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": siteConfig.address.street,
+        "addressLocality": siteConfig.address.locality,
+        "addressRegion": siteConfig.address.region,
+        "postalCode": siteConfig.address.postcode,
+        "addressCountry": siteConfig.address.country,
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": siteConfig.geo.latitude,
+        "longitude": siteConfig.geo.longitude,
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.siteUrl}/#website`,
+      "url": siteConfig.siteUrl,
+      "name": siteConfig.name,
+      "publisher": { "@id": `${siteConfig.siteUrl}/#organization` }
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={`${siteConfig.name} | ${siteConfig.tagline}`}
+  description={siteConfig.description}
+  schema={schema}
+>
+  <Navbar />
+
+  <main id="main-content">
+    <div
+      id="scroll-progress"
+      class={`fixed top-0 left-0 h-1 bg-[${PRIMARY}] z-[60] transition-all duration-100 ease-out`}
+      style="width: 0%"
+    />
+    <Hero />
+
+    <Services />
+
+    <!-- Track Record Section -->
+    <section class="py-24 px-6 md:px-12 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 scroll-reveal opacity-0">
+          <h2 class="text-3xl md:text-5xl leading-[1.1] tracking-tight mb-8 font-grotesk text-black">
+            Why choose <span class={`text-[${PRIMARY}]`}>us?</span>
+          </h2>
+          <p class="font-grotesk text-lg text-zinc-600 max-w-2xl mx-auto">
+            Experience and results you can count on.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {siteConfig.hero.stats.map((stat, i) => (
+            <div class={`text-center scroll-reveal opacity-0 bg-[#F5F4F0] border border-zinc-200 p-8`}>
+              <h3 class={`text-3xl md:text-4xl text-[${PRIMARY}] mb-2`}>{stat.value}</h3>
+              <p class="font-grotesk text-sm text-black font-bold uppercase tracking-widest">{stat.label}</p>
+            </div>
+          ))}
+          <div class="text-center scroll-reveal opacity-0 bg-[#F5F4F0] border border-zinc-200 p-8">
+            <h3 class={`text-3xl md:text-4xl text-[${PRIMARY}] mb-2`}>24hr</h3>
+            <p class="font-grotesk text-sm text-black font-bold uppercase tracking-widest">Response Time</p>
+          </div>
+          <div class="text-center scroll-reveal opacity-0 bg-[#F5F4F0] border border-zinc-200 p-8">
+            <h3 class={`text-3xl md:text-4xl text-[${PRIMARY}] mb-2`}>100%</h3>
+            <p class="font-grotesk text-sm text-black font-bold uppercase tracking-widest">Satisfaction</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Teaser -->
+    <section class="py-32 px-6 md:px-12 bg-black text-white overflow-hidden border-y border-zinc-900">
+      <div class="max-w-7xl mx-auto scroll-reveal opacity-0">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div class="lg:col-span-7">
+            <div class="inline-block font-mono text-[10px] text-[#D4520A] mb-12">
+              ABOUT US
+            </div>
+            <h2 class="text-3xl md:text-5xl leading-[1.1] tracking-tight mb-8 font-grotesk text-white">
+              Small team. <span class={`text-[${PRIMARY}]`}>Big results.</span>
+            </h2>
+          </div>
+          <div class="lg:col-span-5">
+            <p class="font-grotesk text-xl md:text-2xl text-zinc-400 font-medium leading-relaxed">
+              We're a focused team of designers, developers, and strategists who believe in doing things properly. No account managers, no middlemen — just direct access to the people building your project.
+            </p>
+            <a href="/about" class={`inline-block mt-8 text-[${PRIMARY}] font-grotesk font-bold text-sm uppercase tracking-widest hover:text-white transition-colors`}>
+              Learn more about us →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <CallToAction
+      accentColor="orange"
+      heading="Ready to start"
+      headingAccent="your project?"
+      description="Tell us what you're building and we'll get back to you within 24 hours."
+      buttonText="Get in Touch"
+    />
+  </main>
+
+  <Footer />
+
+  <script>
+    const updateScrollProgress = () => {
+      const progressBar = document.getElementById('scroll-progress');
+      if (!progressBar) return;
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.pageYOffset;
+      const progress = (currentScroll / totalScroll) * 100;
+      progressBar.style.width = `${progress}%`;
+    };
+
+    window.addEventListener('scroll', updateScrollProgress);
+    document.addEventListener('astro:page-load', () => {
+      window.addEventListener('scroll', updateScrollProgress);
+    });
+  </script>
+</BaseLayout>

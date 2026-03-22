@@ -1,0 +1,76 @@
+---
+interface Props {
+  heading: string;
+  headingAccent?: string;
+  description: string;
+  buttonText?: string;
+  buttonLink?: string;
+  variant?: 'orange' | 'light';
+  accentColor?: 'orange' | 'purple' | 'green' | 'amber' | 'blue' | 'cyan' | 'pink';
+}
+
+const {
+  heading,
+  headingAccent,
+  description,
+  buttonText = "Get in Touch",
+  buttonLink = "/contact",
+  variant = "light",
+  accentColor = "orange"
+} = Astro.props;
+
+const isOrange = variant === 'orange';
+
+const colorClasses = {
+  orange: { bg: 'bg-[#D4520A]/10', text: 'text-[#D4520A]', button: 'bg-[#D4520A]' },
+  purple: { bg: 'bg-violet-500/10', text: 'text-violet-500', button: 'bg-violet-500' },
+  green: { bg: 'bg-green-700/10', text: 'text-green-700', button: 'bg-green-700' },
+  amber: { bg: 'bg-amber-500/10', text: 'text-amber-500', button: 'bg-amber-500' },
+  blue: { bg: 'bg-indigo-500/10', text: 'text-indigo-500', button: 'bg-indigo-500' },
+  cyan: { bg: 'bg-cyan-500/10', text: 'text-cyan-500', button: 'bg-cyan-500' },
+  pink: { bg: 'bg-rose-500/10', text: 'text-rose-500', button: 'bg-rose-500' },
+};
+
+const colors = colorClasses[accentColor];
+---
+
+<section class:list={[
+  "py-32 px-6 md:px-12 relative overflow-hidden",
+  isOrange ? "bg-[#D4520A] text-white" : `${colors.bg} text-black`
+]}>
+  <div
+    class="absolute inset-0 pointer-events-none"
+    style={`
+      background-image:
+        linear-gradient(to right, ${isOrange ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.08)'} 1px, transparent 1px),
+        linear-gradient(to bottom, ${isOrange ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.08)'} 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, transparent 20%, black 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, transparent 20%, black 80%);
+    `}
+  ></div>
+
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <h2 class:list={[
+      "font-grotesk text-3xl md:text-6xl leading-tight tracking-tight mb-8",
+      isOrange ? "text-white" : "text-black"
+    ]}>
+      {heading} <span class={`${isOrange ? "text-black" : colors.text}`}>{headingAccent}</span>
+    </h2>
+    <p class:list={[
+      "font-grotesk text-xl leading-relaxed font-bold max-w-2xl mx-auto mb-12",
+      isOrange ? "text-white/90" : "text-zinc-700"
+    ]}>
+      {description}
+    </p>
+    <a
+      href={buttonLink}
+      class={`group inline-flex items-center gap-4 px-10 py-4 font-grotesk font-bold uppercase tracking-widest text-sm transition-all duration-300 ${isOrange ? "bg-black text-white hover:bg-white hover:text-black" : `${colors.button} text-white hover:bg-black`}`}
+    >
+      {buttonText}
+      <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+      </svg>
+    </a>
+  </div>
+</section>

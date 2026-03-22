@@ -1,0 +1,187 @@
+---
+import { siteConfig } from '../../site.config';
+
+const PRIMARY = siteConfig.colors.primary;
+const BG = siteConfig.colors.background;
+const hero = siteConfig.hero;
+---
+
+<section id="hero" class="relative min-h-screen flex items-start pt-36 pb-20 md:items-center md:py-32 lg:py-40 px-6 md:px-12 overflow-hidden">
+
+  <div class={`absolute inset-0 z-0 bg-[${BG}]`}></div>
+
+  <!-- Background watermark text -->
+  <div class="absolute top-1/2 left-0 -translate-y-1/2 opacity-5 pointer-events-none select-none font-grotesk text-[40rem] text-zinc-400 leading-none whitespace-nowrap -ml-20">
+    Web
+  </div>
+
+  <div class="max-w-5xl mx-auto w-full relative z-10 text-center">
+
+    <div class={`hero-stagger inline-block px-3 py-1 bg-[${PRIMARY}]/20 border border-[${PRIMARY}]/40 text-[${PRIMARY}] font-grotesk text-xs font-bold uppercase tracking-widest mb-4 md:mb-6`}>
+      {hero.badge}
+    </div>
+
+    <h1 class="hero-stagger font-grotesk text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] 2xl:text-[4.5rem] leading-tight tracking-tight mb-2 md:mb-3 text-zinc-900 min-h-[6.5rem] sm:min-h-[6.5rem] md:min-h-[4rem] lg:min-h-[4.5rem] xl:min-h-[5rem] 2xl:min-h-[5.5rem]">
+      <span id="typewriter-line" class="block">
+        <span id="tw-white">{hero.typewriterLines[0].white}</span>
+        <span id="tw-colored" class={`text-[${PRIMARY}]`}>{hero.typewriterLines[0].colored}</span>
+        <span id="tw-suffix">{hero.typewriterLines[0].suffix}</span>
+      </span>
+    </h1>
+
+    <div class="hero-stagger">
+      <p class="font-grotesk text-lg md:text-xl lg:text-2xl text-zinc-600 max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed font-bold">
+        {hero.subtitle}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={hero.primaryCta.href}
+          class={`bg-zinc-900 text-white px-10 py-4 text-sm font-grotesk font-bold uppercase tracking-widest inline-flex items-center justify-center hover:bg-[${PRIMARY}] transition-colors`}
+        >
+          <span>{hero.primaryCta.label}</span>
+        </a>
+        <a
+          href={hero.secondaryCta.href}
+          class={`border-2 border-zinc-900 px-10 py-4 text-sm font-grotesk font-bold uppercase tracking-widest text-zinc-900 hover:bg-[${PRIMARY}] hover:border-[${PRIMARY}] hover:text-white transition-all flex items-center justify-center`}
+        >
+          {hero.secondaryCta.label}
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    {hero.stats.length > 0 && (
+      <div class="hero-stagger mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-6">
+        {hero.stats.map((stat, i) => (
+          <>
+            {i > 0 && <div class="hidden sm:block w-px h-6 bg-zinc-300"></div>}
+            <span class="font-grotesk text-sm font-bold text-zinc-700">{stat.value} {stat.label}</span>
+          </>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <!-- Concentric Circles -->
+  <div class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+    <div class="concentric-ring" style="--ring-delay: 0s;"></div>
+    <div class="concentric-ring" style="--ring-delay: 2.4s;"></div>
+    <div class="concentric-ring" style="--ring-delay: 4.8s;"></div>
+    <div class="concentric-ring" style="--ring-delay: 7.2s;"></div>
+    <div class="concentric-ring" style="--ring-delay: 9.6s;"></div>
+  </div>
+</section>
+
+<style>
+  .concentric-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 35px solid rgba(255, 255, 255, 0.45);
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    animation: ring-expand 12s linear infinite;
+    animation-delay: var(--ring-delay);
+  }
+
+  @keyframes ring-expand {
+    0% { width: 0; height: 0; opacity: 1; }
+    80% { opacity: 1; }
+    100% { width: 2200px; height: 2200px; opacity: 0; }
+  }
+
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-stagger {
+    opacity: 0;
+    animation: hero-enter 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  .hero-stagger:nth-child(1) { animation-delay: 0.1s; }
+  .hero-stagger:nth-child(2) { animation-delay: 0.3s; }
+  .hero-stagger:nth-child(3) { animation-delay: 0.5s; }
+  .hero-stagger:nth-child(4) { animation-delay: 0.7s; }
+  .hero-stagger:nth-child(5) { animation-delay: 0.9s; }
+</style>
+
+<script>
+  import { siteConfig } from '../../site.config';
+
+  const lines = siteConfig.hero.typewriterLines;
+
+  const typeSpeed = 50;
+  const deleteSpeed = 30;
+  const pauseAfterType = 2000;
+  const pauseAfterDelete = 300;
+  const startDelay = 1000;
+
+  let currentIndex = 0;
+
+  interface TypewriterElements {
+    white: HTMLElement;
+    colored: HTMLElement;
+    suffix: HTMLElement;
+  }
+
+  async function typeText(els: TypewriterElements, line: typeof lines[0]): Promise<void> {
+    for (let i = 0; i <= line.white.length; i++) {
+      els.white.textContent = line.white.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, typeSpeed));
+    }
+    for (let i = 0; i <= line.colored.length; i++) {
+      els.colored.textContent = line.colored.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, typeSpeed));
+    }
+    for (let i = 0; i <= line.suffix.length; i++) {
+      els.suffix.textContent = line.suffix.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, typeSpeed));
+    }
+  }
+
+  async function deleteText(els: TypewriterElements, line: typeof lines[0]): Promise<void> {
+    for (let i = line.suffix.length; i >= 0; i--) {
+      els.suffix.textContent = line.suffix.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, deleteSpeed));
+    }
+    for (let i = line.colored.length; i >= 0; i--) {
+      els.colored.textContent = line.colored.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, deleteSpeed));
+    }
+    for (let i = line.white.length; i >= 0; i--) {
+      els.white.textContent = line.white.slice(0, i);
+      await new Promise(resolve => setTimeout(resolve, deleteSpeed));
+    }
+  }
+
+  async function runTypewriter() {
+    const whiteEl = document.getElementById('tw-white');
+    const coloredEl = document.getElementById('tw-colored');
+    const suffixEl = document.getElementById('tw-suffix');
+    if (!whiteEl || !coloredEl || !suffixEl) return;
+
+    const els: TypewriterElements = { white: whiteEl, colored: coloredEl, suffix: suffixEl };
+
+    await new Promise(resolve => setTimeout(resolve, startDelay));
+
+    while (true) {
+      await deleteText(els, lines[currentIndex]);
+      await new Promise(resolve => setTimeout(resolve, pauseAfterDelete));
+      currentIndex = (currentIndex + 1) % lines.length;
+      await typeText(els, lines[currentIndex]);
+      await new Promise(resolve => setTimeout(resolve, pauseAfterType));
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runTypewriter);
+  } else {
+    runTypewriter();
+  }
+
+  document.addEventListener('astro:page-load', runTypewriter);
+</script>

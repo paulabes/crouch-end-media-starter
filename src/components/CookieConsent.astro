@@ -1,0 +1,43 @@
+---
+---
+
+<div id="cookie-consent" class="fixed bottom-8 left-8 w-1/2 md:w-80 bg-zinc-900 text-white p-4 shadow-lg z-50 hidden">
+  <button
+    id="cookie-close"
+    class="absolute top-2 right-2 text-white/60 hover:text-white transition-colors"
+    aria-label="Close cookie notice"
+  >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+  <p class="font-grotesk text-xs tracking-wide pr-6">
+    We use cookies for essential site functionality. <a href="/privacy" class="underline hover:no-underline">Privacy Policy</a>
+  </p>
+</div>
+
+<script>
+  function initCookieConsent() {
+    const banner = document.getElementById('cookie-consent');
+    const closeBtn = document.getElementById('cookie-close');
+
+    if (!banner || !closeBtn) return;
+
+    if (!localStorage.getItem('cookieConsent')) {
+      banner.classList.remove('hidden');
+    }
+
+    closeBtn.addEventListener('click', () => {
+      localStorage.setItem('cookieConsent', 'dismissed');
+      banner.classList.add('hidden');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieConsent);
+  } else {
+    initCookieConsent();
+  }
+
+  document.addEventListener('astro:page-load', initCookieConsent);
+</script>
