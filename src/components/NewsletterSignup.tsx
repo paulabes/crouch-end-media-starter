@@ -92,7 +92,7 @@ export default function NewsletterSignup() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className={`group inline-flex items-center gap-3 px-8 py-4 bg-[${PRIMARY}] text-white font-grotesk font-bold uppercase tracking-widest text-sm hover:bg-black transition-all duration-300 disabled:opacity-50 whitespace-nowrap`}
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-[#2563eb] text-white font-grotesk font-bold uppercase tracking-widest text-sm hover:bg-[#1d4ed8] transition-all duration-300 disabled:opacity-50 whitespace-nowrap"
             >
               {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
               {status !== 'loading' && (

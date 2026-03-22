@@ -80,10 +80,11 @@ const BG = siteConfig.colors.background;
 
     html {
       scroll-behavior: smooth;
+      scrollbar-gutter: stable both-edges;
     }
 
     body {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: var(--cream);
       overflow-x: clip;
       color: #000;
@@ -96,7 +97,7 @@ const BG = siteConfig.colors.background;
       font-weight: 700;
     }
     .font-grotesk {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     h1, h2, h3 {
@@ -107,7 +108,7 @@ const BG = siteConfig.colors.background;
     }
 
     h4, h5, h6 {
-      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       font-weight: 700 !important;
       text-transform: uppercase !important;
     }
@@ -154,6 +155,26 @@ const BG = siteConfig.colors.background;
     }
 
     .perspective-1000 { perspective: 1000px; }
+
+    /* Global 5px border radius */
+    * {
+      border-radius: 5px;
+    }
+
+    /* Reset elements that must stay sharp or circular */
+    html, body, main, section, nav, footer, header,
+    div, span, p, h1, h2, h3, h4, h5, h6,
+    ul, ol, li, table, tr, td, th,
+    img, svg, path, line, rect, circle,
+    hr, br {
+      border-radius: 0;
+    }
+
+    /* Keep circular elements circular */
+    .\\!rounded-full,
+    [class*="rounded-full"] {
+      border-radius: 9999px !important;
+    }
 
     /* Button hover effects */
     button,

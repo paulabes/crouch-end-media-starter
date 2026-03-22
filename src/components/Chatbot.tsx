@@ -186,22 +186,20 @@ const Chatbot: React.FC = () => {
     <div className={`fixed z-[100] transition-all duration-500 font-grotesk ${isOpen ? 'inset-0 md:inset-auto md:bottom-8 md:right-8 md:w-[400px] md:h-[600px]' : 'bottom-8 right-8'}`}>
       {!isOpen && (
         <div className="relative">
-          <span className={`absolute inset-0 w-16 h-16 rounded-full bg-[${PRIMARY}] animate-ping opacity-30`}></span>
-          <span className={`absolute inset-0 w-16 h-16 rounded-full bg-[${PRIMARY}] animate-ping opacity-20`} style={{ animationDelay: '0.5s' }}></span>
-          <span className={`absolute inset-0 w-16 h-16 rounded-full bg-[${PRIMARY}] animate-ping opacity-10`} style={{ animationDelay: '1s' }}></span>
+          <span className="absolute inset-0 w-16 h-16 !rounded-full bg-[#2563eb] animate-ping opacity-25"></span>
           <button
             onClick={() => setIsOpen(true)}
             aria-label="Open chat"
-            className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-2xl bg-[${PRIMARY}] hover:scale-110 transition-all duration-300`}
+            className="relative w-16 h-16 flex items-center justify-center shadow-2xl bg-[#2563eb] hover:bg-[#1d4ed8] hover:scale-110 transition-all duration-300 !rounded-full"
           >
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
           </button>
         </div>
       )}
 
       {isOpen && (
         <div
-          className={`w-full h-full bg-[${BG}] shadow-[0_20px_50px_rgba(0,0,0,0.2)] flex flex-col overflow-hidden animate-in fade-in duration-300`}
+          className={`w-full h-full bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] flex flex-col overflow-hidden animate-in fade-in duration-300`}
           style={mobileViewportStyle}
         >
           <div className="bg-black p-6 flex justify-between items-center shrink-0">
@@ -215,7 +213,7 @@ const Chatbot: React.FC = () => {
             <button
               onClick={() => setIsOpen(false)}
               aria-label="Close chat"
-              className={`p-2 text-white hover:text-[${PRIMARY}] transition-colors`}
+              className="p-2 text-white hover:text-zinc-400 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -240,7 +238,7 @@ const Chatbot: React.FC = () => {
             {limitReached ? (
               <button
                 onClick={resetChat}
-                className={`w-full bg-[${PRIMARY}] text-white p-4 text-sm font-bold hover:bg-[${siteConfig.colors.primaryHover}] transition-colors`}
+                className="w-full bg-zinc-800 text-white p-4 text-sm font-bold hover:bg-zinc-600 transition-colors"
               >
                 Start new chat
               </button>

@@ -22,7 +22,7 @@ const BG = siteConfig.colors.background;
     </a>
 
     <div id="nav-links" class="hidden xl:flex gap-10 items-center font-grotesk text-sm font-bold uppercase tracking-widest transition-colors duration-500 text-zinc-900">
-      {siteConfig.nav.links.map((link) => (
+      {siteConfig.nav.links.filter(l => l.href !== '/news').map((link) => (
         <a
           href={link.href}
           class:list={['transition-colors', currentPath === link.href ? `text-[${PRIMARY}]` : `hover:text-[${PRIMARY}]`]}
@@ -45,23 +45,30 @@ const BG = siteConfig.colors.background;
             {siteConfig.services.map((service, i) => (
               <a
                 href={service.url}
-                class={`block px-6 py-3 text-xs text-zinc-900 hover:bg-[${BG}] hover:text-[${PRIMARY}] transition-colors ${i < siteConfig.services.length - 1 ? 'border-b border-zinc-100' : ''}`}
+                class={`block px-6 py-4 text-xs text-zinc-900 hover:bg-[${BG}] hover:text-[${PRIMARY}] transition-colors ${i < siteConfig.services.length - 1 ? 'border-b border-zinc-100' : ''}`}
               >{service.tag}</a>
             ))}
           </div>
         </div>
       )}
 
+      {siteConfig.nav.links.filter(l => l.href === '/news').map((link) => (
+        <a
+          href={link.href}
+          class:list={['transition-colors', currentPath === link.href ? `text-[${PRIMARY}]` : `hover:text-[${PRIMARY}]`]}
+        >{link.label}</a>
+      ))}
+
       <a
         id="nav-contact-btn"
         href={siteConfig.nav.cta.href}
-        class={`px-6 py-2 transition-all bg-[${PRIMARY}] text-white hover:bg-black hover:text-white`}
+        class="px-6 py-2 transition-all bg-[#2563eb] text-white hover:bg-[#1d4ed8]"
       >{siteConfig.nav.cta.label}</a>
     </div>
 
     <button id="mobile-menu-button" class="xl:hidden transition-colors duration-500 text-zinc-900" aria-label="Toggle menu" aria-expanded="false">
       <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
       <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -73,7 +80,7 @@ const BG = siteConfig.colors.background;
 <!-- Mobile Menu Panel -->
 <div id="mobile-menu" class="xl:hidden fixed left-0 right-0 bottom-0 bg-white z-40 transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto" style="top: 72px;">
     <div class="flex flex-col p-6 font-grotesk text-base font-bold uppercase tracking-widest text-zinc-900 h-full bg-white">
-      {siteConfig.nav.links.map((link) => (
+      {siteConfig.nav.links.filter(l => l.href !== '/news').map((link) => (
         <a href={link.href} class={`py-2 border-b border-zinc-200/50 hover:text-[${PRIMARY}] transition-colors`}>{link.label}</a>
       ))}
 
@@ -94,7 +101,11 @@ const BG = siteConfig.colors.background;
         </>
       )}
 
-      <a href={siteConfig.nav.cta.href} class={`mt-6 bg-black text-white text-center py-2 hover:bg-[${PRIMARY}] transition-colors`}>{siteConfig.nav.cta.label}</a>
+      {siteConfig.nav.links.filter(l => l.href === '/news').map((link) => (
+        <a href={link.href} class={`py-2 border-b border-zinc-200/50 hover:text-[${PRIMARY}] transition-colors`}>{link.label}</a>
+      ))}
+
+      <a href={siteConfig.nav.cta.href} class="mt-6 bg-[#2563eb] text-white text-center py-2 hover:bg-[#1d4ed8] transition-colors">{siteConfig.nav.cta.label}</a>
     </div>
   </div>
 

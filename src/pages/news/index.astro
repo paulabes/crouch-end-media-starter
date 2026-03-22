@@ -10,29 +10,40 @@ const PRIMARY = siteConfig.colors.primary;
 // Placeholder articles — replace with real content or a CMS
 const articles = [
   {
-    title: "Getting Started with Your New Website",
-    description: "Everything you need to know about launching a successful website for your business.",
-    date: "2024-01-15",
-    tag: "Web Design",
+    title: "5 Things Every Small Business Should Know Before Hiring a Service Provider",
+    description: "Choosing the right partner for your business can save you time, money, and headaches. Here are the key things to look out for.",
+    date: "2025-03-10",
+    tag: "Business Tips",
     tagColor: "rose",
-    slug: "getting-started",
+    slug: "hiring-service-provider",
   },
   {
-    title: "Why Page Speed Matters for SEO",
-    description: "How your website's loading speed directly impacts your search engine rankings and user experience.",
-    date: "2024-01-10",
-    tag: "SEO",
+    title: "How Small Businesses Can Stand Out in a Crowded Market",
+    description: "You don't need a huge budget to compete. We share practical strategies that help small businesses punch above their weight.",
+    date: "2025-02-24",
+    tag: "Growth",
     tagColor: "indigo",
-    slug: "page-speed-seo",
+    slug: "stand-out-crowded-market",
+  },
+  {
+    title: "Why Customer Reviews Matter More Than Ever",
+    description: "Word of mouth has gone digital. Learn why online reviews are your most powerful marketing tool and how to get more of them.",
+    date: "2025-02-10",
+    tag: "Marketing",
+    tagColor: "violet",
+    slug: "customer-reviews-matter",
+  },
+  {
+    title: "The Benefits of Working with a Local Business",
+    description: "From faster response times to community investment, there are real advantages to choosing local. Here's why it pays off.",
+    date: "2025-01-28",
+    tag: "Community",
+    tagColor: "amber",
+    slug: "benefits-local-business",
   },
 ];
 
-const tagColors: Record<string, string> = {
-  rose: 'bg-rose-500/20 border-rose-500/40 text-rose-500',
-  indigo: 'bg-indigo-500/20 border-indigo-500/40 text-indigo-500',
-  violet: 'bg-violet-500/20 border-violet-500/40 text-violet-500',
-  amber: 'bg-amber-500/20 border-amber-500/40 text-amber-500',
-};
+const tagClass = `bg-[${PRIMARY}]/20 border-[${PRIMARY}]/40 text-[${PRIMARY}]`;
 ---
 
 <BaseLayout
@@ -41,33 +52,40 @@ const tagColors: Record<string, string> = {
 >
   <Navbar />
 
-  <main id="main-content" class="bg-[#F5F4F0]">
+  <main id="main-content" class="bg-[#f4f4f5]">
     <div id="scroll-progress" class={`fixed top-0 left-0 h-1 bg-[${PRIMARY}] z-[60] transition-all duration-100 ease-out`} style="width: 0%" />
 
-    <section class="pt-48 pb-20 px-6 md:px-12 bg-[#F5F4F0] relative overflow-hidden">
+    <section class="pt-48 pb-20 px-6 md:px-12 bg-zinc-900 relative overflow-hidden">
       <div class="max-w-4xl mx-auto text-center scroll-reveal opacity-0 relative z-10">
-        <div class={`inline-block px-3 py-1 bg-[${PRIMARY}]/20 border border-[${PRIMARY}]/40 text-[${PRIMARY}] font-grotesk text-xs font-bold uppercase tracking-widest mb-8`}>
+        <div class={`inline-block px-3 py-1 bg-white/10 border border-white/20 text-zinc-300 font-grotesk text-xs font-bold uppercase tracking-widest mb-8`}>
           News
         </div>
-        <h1 class="font-grotesk text-5xl md:text-[5.5rem] leading-tight tracking-tight text-black mb-10">
-          Latest <span class={`text-[${PRIMARY}]`}>articles.</span>
+        <h1 class="font-grotesk text-5xl md:text-[5.5rem] leading-tight tracking-tight text-white mb-10">
+          Latest articles.
         </h1>
-        <p class="font-grotesk text-xl md:text-2xl text-zinc-600 leading-relaxed font-bold max-w-3xl mx-auto">
-          Insights, tips, and news from our team.
+        <p class="font-grotesk text-xl md:text-2xl text-zinc-300 leading-relaxed font-bold max-w-3xl mx-auto">
+          Tips, insights, and updates to help your business thrive.
         </p>
       </div>
     </section>
 
-    <section class="pb-20 px-6 md:px-12">
+    <section class="py-24 px-6 md:px-12">
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
         {articles.map((article) => (
-          <a href={`/news/${article.slug}`} class="bg-white border border-zinc-100 p-8 group scroll-reveal opacity-0 block hover:shadow-lg transition-shadow">
-            <div class={`inline-block px-3 py-1 border font-grotesk text-xs font-bold uppercase tracking-widest mb-4 ${tagColors[article.tagColor] || tagColors.rose}`}>
-              {article.tag}
+          <a href={`/news/${article.slug}`} class="bg-white border border-zinc-100 group scroll-reveal opacity-0 block hover:shadow-lg transition-shadow overflow-hidden rounded-[5px]">
+            <div class="aspect-[16/9] bg-zinc-100 flex items-center justify-center">
+              <svg class="w-12 h-12 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
             </div>
-            <h3 class={`font-grotesk text-2xl md:text-3xl mb-4 text-black leading-tight tracking-tight group-hover:text-[${PRIMARY}] transition-colors`}>{article.title}</h3>
-            <p class="text-zinc-600 font-grotesk font-medium leading-relaxed mb-4">{article.description}</p>
-            <span class="font-grotesk text-xs text-zinc-400 uppercase tracking-widest">{new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            <div class="p-8">
+              <div class={`inline-block px-3 py-1 border font-grotesk text-xs font-bold uppercase tracking-widest mb-4 ${tagClass}`}>
+                {article.tag}
+              </div>
+              <h3 class={`font-grotesk text-2xl md:text-3xl mb-4 text-black leading-tight tracking-tight group-hover:text-zinc-500 transition-colors`}>{article.title}</h3>
+              <p class="text-zinc-600 font-grotesk font-medium leading-relaxed mb-4">{article.description}</p>
+              <span class="font-grotesk text-xs text-zinc-400 uppercase tracking-widest">{new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
           </a>
         ))}
       </div>

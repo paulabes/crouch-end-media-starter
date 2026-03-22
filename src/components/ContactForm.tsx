@@ -231,7 +231,7 @@ const ContactForm: React.FC = () => {
           <button
             type="submit"
             disabled={formStatus === 'validating' || formStatus === 'sending'}
-            className={`w-full bg-black text-white py-4 font-grotesk font-bold uppercase tracking-widest text-sm hover:bg-[${PRIMARY}] transition-all disabled:opacity-50 flex items-center justify-center gap-4`}
+            className="w-full bg-[#2563eb] text-white py-4 font-grotesk font-bold uppercase tracking-widest text-sm hover:bg-[#1d4ed8] transition-all disabled:opacity-50 flex items-center justify-center gap-4"
           >
             {formStatus === 'validating' ? (
               <>

@@ -1,13 +1,13 @@
-# Crouch End Media — Starter Template
+# Starter Website Template
 
-Config-driven website template built with Astro 5, React 19, and Tailwind CSS. Deployed on Vercel. Duplicate this repo for each new client project.
+Config-driven website template built with Astro 5, React 19, and Tailwind CSS. Deployed on Vercel. Duplicate this repo and edit `site.config.ts` for each new client.
 
 ## Quick Start
 
 1. **Duplicate the repo** — clone or fork into a new project
-2. **Edit `site.config.ts`** — business name, colors, services, contact info, hero content, chatbot, footer
+2. **Edit `site.config.ts`** — business name, colors, services, contact info, hero content
 3. **Update `astro.config.mjs`** — set `site` URL to match the client domain
-4. **Edit the chatbot prompt** — customise personality and service knowledge in `src/pages/api/chat.ts`
+4. **Edit the chatbot prompt** — customise personality in `src/pages/api/chat.ts`
 5. **Copy `.env.example` to `.env`** and add API keys
 6. **Replace assets** — favicon (`public/favicon.svg`), OG image (`public/images/og-default.jpg`, 1200x630, JPG only)
 7. **Install and run**:
@@ -31,31 +31,79 @@ Config-driven website template built with Astro 5, React 19, and Tailwind CSS. D
 
 ## Config File (`site.config.ts`)
 
-Single source of truth. All components pull from this file — no need to hunt through templates.
+Single source of truth. All components pull from this file.
 
 - Business name, legal name, tagline, description
 - Contact details (email, phone, address, geo)
 - Site URL and social links
-- Design tokens (primary color, hover color, background)
+- Design tokens (accent color, background, dark)
 - Navigation links
-- Services (title, description, tag, URL, accent color)
-- Hero section (badge, typewriter lines, subtitle, CTAs, stats)
+- Services (title, description, tag, URL)
+- Hero section (badge, heading lines, subtitle, CTAs, stats)
 - Chatbot (name, greeting, placeholder)
-- Footer (heading, description, CTA, watermark text)
+- Footer (heading, description, CTA)
 - Email recipients (from/to addresses)
+
+## Design Tokens
+
+```
+Accent:      #2563eb  (vibrant blue — CTAs, buttons, active states)
+Background:  #f4f4f5  (zinc-100 — alternating section backgrounds)
+Dark:        #18181b  (zinc-900 — hero sections, dark areas, footer)
+```
+
+**Font**: Inter 400/500/600/700 (all text — headings and body)
+
+**Section rhythm**: white → zinc-100 → zinc-900 (alternating)
+
+**Spacing**: `py-24` for all content sections, `pt-48 pb-20` for hero sections
+
+**Border radius**: 5px globally on buttons, inputs, and interactive elements
 
 ## Pages
 
 | Page | Path | Notes |
 |------|------|-------|
-| Home | `/` | Hero with typewriter, services grid, stats, about teaser, CTA |
-| About | `/about` | Values grid, team placeholders |
+| Home | `/` | Hero, services grid, stats, about teaser, CTA |
+| About | `/about` | Values grid, team section |
 | Services | `/services` | Auto-populated from config |
-| News | `/news` | Blog listing with placeholder articles |
+| News | `/news` | Blog listing with image placeholders |
 | Contact | `/contact` | Contact info + form with AI validation |
 | Privacy | `/privacy` | Template privacy policy |
 | Terms | `/terms` | Template terms of service |
-| 404 | `/404` | Animated not-found page |
+| 404 | `/404` | Not-found page |
+
+## File Structure
+
+```
+site.config.ts              <- EDIT THIS for each client
+src/
+  layouts/BaseLayout.astro  <- Global layout, fonts, animations
+  components/
+    Navbar.astro            <- Config-driven nav + services dropdown + mobile menu
+    Hero.astro              <- Clean hero with badge, heading, CTAs, stats
+    Footer.astro            <- Config-driven footer
+    Services.astro          <- Config-driven service cards with hover
+    CallToAction.astro      <- Reusable CTA section
+    CookieConsent.astro     <- Cookie banner
+    Chatbot.tsx             <- AI chat widget (client:idle)
+    ContactForm.tsx         <- Form with AI validation + budget slider
+    NewsletterSignup.tsx    <- Email subscription
+  pages/
+    index.astro             <- Homepage
+    about.astro             <- About page
+    services.astro          <- Services overview
+    contact.astro           <- Contact form + info
+    news/index.astro        <- Blog/news listing
+    privacy.astro           <- Privacy policy
+    terms.astro             <- Terms of service
+    404.astro               <- Not found
+    api/
+      chat.ts               <- Chatbot API (Gemini)
+      contact.ts            <- Contact form (Gemini + Resend)
+      validate-contact.ts   <- Form validation (Gemini)
+      subscribe.ts          <- Newsletter (Resend)
+```
 
 ## Adding Content
 
@@ -63,9 +111,9 @@ Single source of truth. All components pull from this file — no need to hunt t
 ```
 /new-service-page [name]
 ```
-1. Add the service to `site.config.ts` → `services` array
+1. Add the service to `site.config.ts` -> `services` array
 2. Create `src/pages/services/[slug].astro`
-3. Navbar and footer update automatically
+3. Navbar dropdown and footer update automatically
 
 ### New article
 ```
@@ -76,17 +124,11 @@ Single source of truth. All components pull from this file — no need to hunt t
 
 ## Animations
 
-All pages include these micro animations out of the box:
-
-- **Scroll progress bar** — thin colored bar at top fills as user scrolls
+- **Scroll progress bar** — thin accent bar at top fills as user scrolls
 - **Scroll reveal** — elements with `scroll-reveal opacity-0` fade + slide up on scroll
-- **Hero stagger** — elements enter sequentially with 0.2s delays
-- **Typewriter** — hero heading types, deletes, and cycles through configured lines
-- **Concentric rings** — expanding circular waves behind hero
+- **Hero stagger** — elements enter sequentially with staggered delays
 - **Button hover** — scale(1.03) on hover, scale(0.97) on press
-- **Service cards** — full accent color fill on hover with text color transition
-- **Value props** — numbered items with heading color change on hover
-- **Watermark text** — giant faded text in section backgrounds
+- **Service cards** — dark background fill on hover with white text transition
 
 ## API Endpoints
 
@@ -94,7 +136,7 @@ All pages include these micro animations out of the box:
 |----------|---------|------------|
 | `/api/chat` | AI chatbot (Gemini) | 50 msg/hr per IP |
 | `/api/contact` | Contact form (Gemini validation + Resend) | 5/hr per IP |
-| `/api/validate-contact` | Real-time form field validation | — |
+| `/api/validate-contact` | Real-time form field validation | -- |
 | `/api/subscribe` | Newsletter signup (Resend) | 3/hr per IP |
 
 ## Environment Variables
@@ -125,25 +167,21 @@ UPSTASH_REDIS_REST_TOKEN    # Rate limiting auth
 - [ ] Replace `public/favicon.svg` with client logo
 - [ ] Add OG image at `public/images/og-default.jpg` (1200x630, JPG)
 - [ ] Edit chatbot system prompt in `src/pages/api/chat.ts`
-- [ ] Update `tailwind.config.mjs` if primary color changes
+- [ ] Update accent color in `site.config.ts`, `tailwind.config.mjs`, and hardcoded button classes
 - [ ] Write real page content (about, services, news)
 - [ ] Add team photos to about page
 - [ ] Create service detail pages
 - [ ] Set up Vercel project with env vars
 - [ ] Configure Resend domain for email delivery
-- [ ] Create GitHub repo and push
 - [ ] Run `/check-site` before first deploy
 
-## Design Tokens
+## Important Notes
 
-```
-Primary:     #D4520A  (burnt-orange — CTAs, accents, scrollbar)
-Background:  #F5F4F0  (cream — alternating section backgrounds)
-Dark:        #18181b  (zinc-900 — text, dark sections, footer)
-```
-
-**Fonts**: Inter 700 (h1-h3), Space Grotesk 400/500/700 (body, h4-h6)
-
-**Section rhythm**: white → cream → zinc-900 (alternating)
-
-**Spacing**: `py-20 md:py-28` or `py-32` for sections, `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8` for containers
+- All styling via Tailwind classes — no separate CSS files
+- Use `scroll-reveal opacity-0` class for scroll animations
+- Mobile-first responsive design
+- Accessibility: skip-to-content, focus states, proper heading hierarchy
+- OG images must be JPG (Twitter doesn't support WebP)
+- Chatbot system prompt in `/api/chat.ts` needs manual editing per client
+- Nav order: Home, About, Services (dropdown), News, Contact
+- Greyscale base with accent color on interactive elements only

@@ -7,21 +7,21 @@
 
 export const siteConfig = {
   // ── Business Details ──────────────────────────────────────────────
-  name: "Starter Agency",
-  legalName: "Starter Agency Ltd.",
-  tagline: "We build websites that work.",
-  description: "A modern web design and development studio. We build fast, beautiful websites for businesses.",
+  name: "Your Business Name",
+  legalName: "Your Business Name Ltd.",
+  tagline: "Quality service you can trust.",
+  description: "A friendly, reliable local business dedicated to delivering excellent service. We put our customers first and take pride in everything we do.",
   foundedYear: 2024,
   registrationNumber: "", // Companies House or equivalent
 
   // ── Contact ───────────────────────────────────────────────────────
-  email: "hello@starteragency.com",
-  phone: "+44 7000 000000",
+  email: "hello@yourbusiness.com",
+  phone: "+44 20 1234 5678",
   address: {
     street: "123 High Street",
-    locality: "London",
-    region: "London",
-    postcode: "N1 1AA",
+    locality: "Your Town",
+    region: "Your County",
+    postcode: "AB1 2CD",
     country: "GB",
   },
   geo: {
@@ -30,7 +30,7 @@ export const siteConfig = {
   },
 
   // ── URLs ──────────────────────────────────────────────────────────
-  siteUrl: "https://starteragency.com",
+  siteUrl: "https://yourbusiness.com",
   social: {
     twitter: "", // e.g. "https://twitter.com/yourbrand"
     youtube: "", // e.g. "https://youtube.com/@yourbrand"
@@ -40,9 +40,10 @@ export const siteConfig = {
 
   // ── Design Tokens ─────────────────────────────────────────────────
   colors: {
-    primary: "#D4520A",      // CTAs, accents, links, scrollbar
-    primaryHover: "#a33d00",  // Darker shade for hover states
-    background: "#F5F4F0",   // Cream — alternating section bg
+    primary: "#2563eb",      // Vibrant blue — CTAs, accents, links, scrollbar
+    primaryHover: "#1d4ed8",  // Darker blue — hover states
+    accent: "#2563eb",       // Blue accent
+    background: "#f4f4f5",   // zinc-100 — alternating section bg
     dark: "#18181b",         // zinc-900 — text, dark sections
   },
 
@@ -50,9 +51,9 @@ export const siteConfig = {
   // Update both here AND the <link> tag in BaseLayout if you change fonts
   fonts: {
     heading: "Inter",        // h1, h2, h3
-    body: "Space Grotesk",   // Body text, h4-h6
+    body: "Inter",           // Body text
     accent: "Lora",          // Optional serif for italicized taglines
-    googleFontsUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Space+Grotesk:wght@400;500;700&display=swap",
+    googleFontsUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
   },
 
   // ── Navigation ────────────────────────────────────────────────────
@@ -60,7 +61,6 @@ export const siteConfig = {
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
-      { label: "Services", href: "/services" },
       { label: "News", href: "/news" },
     ],
     cta: { label: "Contact", href: "/contact" },
@@ -69,67 +69,65 @@ export const siteConfig = {
   // ── Services ──────────────────────────────────────────────────────
   services: [
     {
-      title: "Website Design",
-      description: "Custom website design and development. Responsive, fast, and SEO-optimised.",
-      tag: "Web Design",
-      url: "/services/website-design",
+      title: "Consultations",
+      description: "One-to-one consultations tailored to your needs. We listen, advise, and help you make the right decisions.",
+      tag: "Consulting",
+      url: "/services/consultations",
       accent: "pink",    // amber | pink | purple | blue | cyan | green
     },
     {
-      title: "SEO & Marketing",
-      description: "Search engine optimisation to get your business found online by the right people.",
-      tag: "SEO",
-      url: "/services/seo",
+      title: "Ongoing Support",
+      description: "Reliable, responsive support whenever you need it. We're here to keep things running smoothly.",
+      tag: "Support",
+      url: "/services/support",
       accent: "blue",
     },
     {
-      title: "Branding & Identity",
-      description: "Logo design, brand guidelines, and visual identity that makes you memorable.",
-      tag: "Branding",
-      url: "/services/branding",
+      title: "Custom Solutions",
+      description: "Bespoke solutions designed around your business. No off-the-shelf packages — just what works for you.",
+      tag: "Solutions",
+      url: "/services/solutions",
       accent: "purple",
     },
   ],
 
   // ── Hero Section ──────────────────────────────────────────────────
   hero: {
-    badge: "Web Design Studio",
+    badge: "Local & Trusted",
     typewriterLines: [
-      { white: "Need a ", colored: "website", suffix: "?" },
-      { white: "Want more ", colored: "customers?", suffix: "" },
-      { white: "Ready to ", colored: "grow online?", suffix: "" },
+      { white: "Need expert ", colored: "advice", suffix: "?" },
     ],
-    subtitle: "We design and build beautiful websites for businesses of all sizes.",
-    primaryCta: { label: "Get Started", href: "/contact" },
-    secondaryCta: { label: "Our Work", href: "/services" },
+    subtitle: "We help small businesses succeed with honest advice, quality work, and personal service you can rely on.",
+    primaryCta: { label: "Get a Free Quote", href: "/contact" },
+    secondaryCta: { label: "Our Services", href: "/services" },
     stats: [
-      { value: "50+", label: "Projects Delivered" },
-      { value: "5★", label: "Client Reviews" },
+      { value: "10+", label: "Years Experience" },
+      { value: "5★", label: "Customer Reviews" },
     ],
   },
 
   // ── Chatbot ───────────────────────────────────────────────────────
   chatbot: {
-    name: "AI Assistant",
-    greeting: "Welcome! How can I help you today?",
-    placeholder: "Ask us anything...",
+    name: "Assistant",
+    greeting: "Hi there! Got a question about our services? I'm happy to help.",
+    placeholder: "Ask about our services...",
     // The system prompt is in /src/pages/api/chat.ts — edit it there
     // to customise the chatbot's personality and knowledge base
   },
 
   // ── Footer ────────────────────────────────────────────────────────
   footer: {
-    heading: "Let's build something",
-    headingAccent: "great.",
-    description: "We're a small but experienced web design studio. Get in touch to discuss your project.",
+    heading: "Let's work",
+    headingAccent: "together.",
+    description: "We're a small, dedicated team that cares about doing great work. Get in touch to see how we can help your business.",
     ctaLabel: "Get in Touch",
     ctaLink: "/contact",
-    watermark: "SA", // Large background text (initials)
+    watermark: "YB", // Large background text (initials)
   },
 
   // ── Email Recipients ──────────────────────────────────────────────
-  emailFrom: "Starter Agency <hello@starteragency.com>",
-  emailTo: "hello@starteragency.com",
+  emailFrom: "Your Business Name <hello@yourbusiness.com>",
+  emailTo: "hello@yourbusiness.com",
 };
 
 export type SiteConfig = typeof siteConfig;
