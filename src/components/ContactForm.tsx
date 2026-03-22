@@ -200,7 +200,7 @@ const ContactForm: React.FC = () => {
               id="contact-budget" name="budget" type="range"
               min="500" max="15000" step="500" value={budget}
               onChange={(e) => setBudget(parseInt(e.target.value))}
-              className={`w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[${PRIMARY}]`}
+              className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#2563eb]"
             />
             <div className="flex justify-between mt-4 font-grotesk text-xs font-bold text-zinc-400 uppercase tracking-widest">
               <span>£500</span>
