@@ -25,5 +25,5 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Claude Code
-.claude/
+# Claude Code (keep skills tracked, ignore local settings)
+.claude/settings.local.json
