@@ -45,7 +45,7 @@ const BG = siteConfig.colors.background;
             {siteConfig.services.map((service, i) => (
               <a
                 href={service.url}
-                class={`block px-6 py-4 text-xs text-zinc-900 hover:bg-[${BG}] hover:text-[${PRIMARY}] transition-colors ${i < siteConfig.services.length - 1 ? 'border-b border-zinc-100' : ''}`}
+                class={`block px-6 py-4 text-sm font-bold uppercase tracking-widest text-zinc-900 hover:bg-[${BG}] hover:text-[${PRIMARY}] transition-colors ${i < siteConfig.services.length - 1 ? 'border-b border-zinc-100' : ''}`}
               >{service.tag}</a>
             ))}
           </div>
