@@ -76,7 +76,7 @@ const schema = {
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {siteConfig.hero.stats.map((stat, i) => (
+          {siteConfig.hero.stats.map((stat) => (
             <div class={`text-center scroll-reveal opacity-0 bg-[#F5F4F0] border border-zinc-200 p-8`}>
               <h3 class={`text-3xl md:text-4xl text-[${PRIMARY}] mb-2`}>{stat.value}</h3>
               <p class="font-grotesk text-sm text-black font-bold uppercase tracking-widest">{stat.label}</p>
